@@ -36,10 +36,10 @@ class DataWARP:
 
     def process_data(self, start_range=None, end_range=None, include_char=None):
         try:
-            # Usuń istniejący folder docelowy, jeśli istnieje
+            # Delete the existing destination folder, if it exists
             if os.path.exists(self.output_folder):
                 shutil.rmtree(self.output_folder)
-            os.makedirs(self.output_folder)  # Utwórz folder docelowy
+            os.makedirs(self.output_folder)  # Create a destination folder
 
             for source_folder in self.source_folders:
                 source_suffix = os.path.basename(source_folder)
@@ -53,24 +53,24 @@ class DataWARP:
                                 if station_id in self.station_ids:
                                     file_path = os.path.join(root, file)
 
-                                    # Sprawdzanie zakresu liczb w nazwie pliku od znaku 16 do 19
+                                    # Checking the range of numbers in the file name from character 16 to 19
                                     if start_range is not None and end_range is not None:
                                         file_range = int(file[16:19])
                                         if not (start_range <= file_range <= end_range):
                                             continue
 
-                                    # Sprawdzanie typu s lub k - 43 znak w nazwie
+                                    # Check type s or k - 43 character in name
                                     if include_char is not None and file[43] != include_char:
                                         continue
 
                                     if station_id in station_data:
-                                        # Jeśli dane o tym samym ID stacji już istnieją, dołącz dane
+                                        # If data with the same station ID already exists, include the data
                                         data = pd.read_csv(file_path, sep=';')
                                         data.columns = data.columns.str.replace(" ", "")
                                         station_data[station_id] = pd.concat([station_data[station_id], data],
                                                                              ignore_index=True)
                                     else:
-                                        # Jeśli dane o tym samym ID stacji nie istnieją, utwórz nowe dane
+                                        # If data with the same station ID does not exist, create new data
                                         data = pd.read_csv(file_path, sep=';')
                                         data.columns = data.columns.str.replace(" ", "")
                                         station_data[station_id] = data
@@ -78,7 +78,7 @@ class DataWARP:
                             print(f"Error processing file {file}: {file_error}")
 
                     for station_id, data in station_data.items():
-                        data = data.dropna()  # Usuń wiersze z wartościami NaN
+                        data = data.dropna()
                         output_file = os.path.join(self.output_folder, f"{station_id}_{source_suffix}.csv")
                         data.to_csv(output_file, index=False, sep=';')
                         self.data_dict[f"{station_id}_{source_suffix}"] = data
@@ -90,6 +90,7 @@ class DataWARP:
         return self.data_dict
 
     def selected_data(self):
+        # Selected data with load of file
         data_dict_2 = {}
         for k, data in self.data_dict.items():
             try:
