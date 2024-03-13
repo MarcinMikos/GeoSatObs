@@ -1,9 +1,26 @@
+# Libraries
 from ftplib import FTP_TLS
 import os
 import hatanaka
 from pathlib import Path
 
+# A class that retrieves RNX files from a particular data service
 class DownloadRNX:
+    """
+    The class uses a designated center that stores observations of Global Navigation Satellite Systems.
+    It downloads the files in .gz format, which it then unpacks into .crx (hatanaka) format, and then releases
+    the already available .rnx format.
+
+    save_path - path to save data,
+    host - link to data center,
+    user - login to enable you to log in,
+    passwd - password to enable you to log in,
+    cwd_path - a specific place on the server with data,
+    year - year / years for data,
+    day - day / days for data,
+    name_station_list - specyfic name for International GNSS Service (IGS),
+                        he first four characters of the station designation,
+    """
     def __init__(self, save_path:str, host:str, user:str, passwd:str,
                  cwd_path:str, year:list, day:list, name_station_list:list):
         self.save_path = save_path
@@ -52,13 +69,22 @@ class DownloadRNX:
                             #     with gzip.open(gz_name, 'rb') as f_in, open(file_name, 'wb') as f_out:
                             #         shutil.copyfileobj(f_in, f_out)
                             #     os.remove(gz_name)
+
         except Exception as e:
             print(f"Error downloading RINEX files: {e}")
         finally:
             if self.ftps:
                 self.ftps.quit()
 
+# The class takes the Day of Year (DoY) as a string
 class ModifiedDay:
+    """
+    The class takes information about specific days in the DOY system
+    and writes it to a string as a string of three characters.
+
+    start_day - first day for analisys,
+    end_day - last day for analisys,
+    """
     def __init__(self, start_day:int, end_day:int) -> list:
         self.start_day = start_day
         self.end_day = end_day
