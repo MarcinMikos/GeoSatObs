@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a3899754-40df-4d4e-b7e6-7bcf8a2727cf" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/RunFile/read_analysis_file.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/_1_DownloadRNX/downloadRNX.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/_1_DownloadRNX/downloadRNX.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/_2_ReadFileLog/readFileLog.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/_2_ReadFileLog/readFileLog.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +41,8 @@
   "keyToString": {
     "Python.RNX_download.executor": "Run",
     "Python.downloadRNX.executor": "Run",
+    "Python.readFileLog.executor": "Run",
+    "Python.read_analysis_file.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
