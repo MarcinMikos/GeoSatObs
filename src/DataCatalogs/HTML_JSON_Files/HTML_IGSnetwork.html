@@ -1,0 +1,822 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-T44KG52');</script>
+    <!-- End Google Tag Manager -->
+
+    
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>IGS Network</title>
+
+    <link rel="shortcut icon" type="image/png" href="/static/slm/img/favicon.ico"/>
+
+    
+    <!-- Mapbox CSS -->
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
+    <!-- Mapbox Export Plugin CSS -->
+    <link href='https://watergis.github.io/mapbox-gl-export/mapbox-gl-export.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.1/mapbox-gl-draw.css" type="text/css">
+    <!-- JQuery CSS -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <!-- Datatables CSS (put NEW ones after the first line of code NOT before) -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedcolumns/4.3.0/css/fixedColumns.dataTables.min.css"/>
+
+    <!-- https://github.com/lipis/flag-icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    
+        <link rel='stylesheet' type='text/css' media='screen' href='/static/slm/css/style.css'>
+        <link rel='stylesheet' type='text/css' media='screen' href='/static/slm/css/defines.css'>
+        <link rel='stylesheet' type='text/css' media='screen' href='/static/slm_network_map/css/style.css'>
+    
+
+    
+
+
+    
+        <!-- Mapbox JS -->
+        <script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
+        <!-- Mapbox Export Plugin JS -->
+        <script src="https://watergis.github.io/mapbox-gl-export/mapbox-gl-export.js"></script>
+
+        <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.1/mapbox-gl-draw.js"></script>
+        <!-- JQuery JS -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-polyline/1.2.1/polyline.min.js" integrity="sha512-ado/Sj860VX+pilzZ/vK+RjnR03pavedg3VaZX44dR625sMpLVXFpSMpBYlMvJR8tu6CN/aRywMlk0flZpxrBQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+        <!-- Highcharts Stock JS -->
+        <script src="https://code.highcharts.com/stock/highstock.js"></script>
+        <script src="https://code.highcharts.com/stock/highcharts-more.js"></script>
+        <script src="https://code.highcharts.com/stock/modules/data.js"></script>
+        <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+        <!-- Datatables JS (put new ones after the first line of code NOT before) -->
+        <script type="text/javascript" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.13.6/features/scrollResize/dataTables.scrollResize.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/4.3.0/js/dataTables.fixedColumns.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <!-- for copying to clipboard button -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" integrity="sha512-Qlv6VSKh1gDKGoJbnyA5RMXYcvnpIqhO++MhIM2fStMcGT9i2T//tSwYFlcyoRRDcDZ+TYHpH8azBBCyhpSeqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        
+            <script src="/static/slm/js/enums.js"></script>
+        
+    
+
+    
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T44KG52"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    
+
+    <div class="branding">
+        <a href="https://igs.org" target="_blank">
+            <img class="light-logo" src="/static/slm/img/slm-logo.svg" alt="IGS" />
+            <img class="dark-logo" src="/static/slm/img/slm-logo-black.svg" alt="IGS" style="display: none"/>
+        </a>
+    </div>
+
+    <div id="network-map-container">
+        <div id="network-map" class="network-map"></div>
+        <h1 class="visually-hidden">IGS Network</h1>
+
+        
+
+<div id="station-overview" class="col-sm-1 col-md-3 d-flex justify-content-center align-middle">
+    <div id="left" class="sidebar flex-center left collapsed">
+        <div id="left-sidebar" class="left sidebar-content rounded-rect flex-center bg-light p-3">
+            <div class="container-fluid mx-auto text-center">
+                <div class="container-fluid w-100 d-flex flex-column">
+                    <!-- Header -->
+                    <div class="row d-flex align-items-center py-3">
+                        <div class="col-7 d-flex flex-row align-items-center">
+                            <img class="icon me-2 station-marker" src="" alt="Okay">
+                            <h1 id='station-info-header' class="mb-0 station-info-name"></h1>
+                        </div>
+                        <div class="col-5 d-flex flex-row justify-content-end">
+                          <a id="station-slm-link" type="button" class="btn btn-primary mb-0 me-1" target="_blank" href="" style="display: none">SLM <i class="bi bi-box-arrow-up-right"></i></a>
+                          <a id="station-new-tab" type="button" class="btn btn-primary mb-0" target="_blank" href="">New Tab <i class="bi bi-box-arrow-up-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Station Information -->
+                    <div class="px-0 mb-auto">
+                        <nav class="px-0">
+                            <ul class="nav nav-tabs nav-justified" id="sb-info-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="sb-info-overview-tab" data-bs-toggle="tab" data-bs-target="#sb-info-overview" type="button" role="tab" aria-controls="info-overview" aria-selected="true">Overview</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="sb-info-ac-usage-tab" data-bs-toggle="tab" data-bs-target="#sb-info-ac-usage" type="button" role="tab" aria-controls="info-ac-usage" aria-selected="false">AC Usage</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="sb-info-equipment-tab" data-bs-toggle="tab" data-bs-target="#sb-info-equipment" type="button" role="tab" aria-controls="info-rec" aria-selected="false">Equipment</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="sb-info-email-tab" data-bs-toggle="tab" data-bs-target="#sb-info-email" type="button" role="tab" aria-controls="info-email" aria-selected="false">Advisories</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="sb-info-downloads-tab" data-bs-toggle="tab" data-bs-target="#sb-info-downloads" type="button" role="tab" aria-controls="info-downloads" aria-selected="false">Downloads</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="sb-info-photos-tab" data-bs-toggle="tab" data-bs-target="#sb-info-photos" type="button" role="tab" aria-controls="info-photos" aria-selected="false">Photos</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="tab-content p-1" id="sb-info-tabContent">
+                            <!-- Overview Content -->
+                            <div class="tab-pane fade show active overflow-auto" id="sb-info-overview" role="tabpanel" aria-labelledby="info-overview-tab" tabindex="0" style="max-height: 300px;">
+                                
+
+<table class="table table-striped text-start">
+    <tr>
+        <th scope="row">Receiver - Firmware</th>
+        <td class="receiver-firmware"> - </td>
+    </tr>
+    <tr>
+        <th scope="row">Antenna - Radome</th>
+        <td class="antenna-radome"> - </td>
+    </tr>
+    <tr>
+        <th scope="row">Antenna Calibration</th>
+        <td class="antenna-calibration"></td>
+    </tr>
+    <tr>
+        <th scope="row">Clock</th>
+        <td class="frequency-standard"></td>
+    </tr>
+    <tr>
+        <th scope="row">Last RINEX Data - Primary Data Center</th>
+        <td class="last-rinex-data">No Data - </td>
+    </tr>
+    <tr>
+        <th scope="row">Constellation - RINEX</th>
+        <td class="constellation-rinex"></td>
+    </tr>
+    <tr>
+        <th scope="row">Constellation - RealTime</th>
+        <td class="constellation-realtime"></td>
+    </tr>
+    <tr>
+        <th scope="row">DOMES Number</th>
+        <td class="domes-number"></td>
+    </tr>
+    <tr>
+        <th scope="row">Nearby Tide Gauge</th>
+        
+            <td class="nearby-tidegauge">N/A</td>
+        
+    </tr>
+</table>
+
+                            </div>
+
+                            <!-- AC Usage Content -->
+                            <div class="tab-pane fade overflow-auto" id="sb-info-ac-usage" role="tabpanel" aria-labelledby="info-ac-usage-tab" tabindex="0" style="max-height: 300px;">
+                                
+
+<table class="table table-striped text-start ac-table">
+    <thead class="sticky-top bg-light border-bottom border-dark border-2">
+        <tr>
+            <th scope="col">AC</th>
+            <th scope="col" class="text-right">Final</th>
+            <th scope="col" class="text-right">Rapid</th>
+            <th scope="col" class="text-right">Ultra</th>
+        </tr>
+    </thead>
+    <tbody>
+    
+        <tr id="ac-emr">
+            <th scope="row">EMR</th>
+            <td class="text-right final"></td>
+            <td class="text-right rapid"></td>
+            <td class="text-right ultra"></td>
+        </tr>
+    
+        <tr id="ac-whu">
+            <th scope="row">WHU</th>
+            <td class="text-right final"></td>
+            <td class="text-right rapid"></td>
+            <td class="text-right ultra"></td>
+        </tr>
+    
+        <tr id="ac-gop">
+            <th scope="row">GOP</th>
+            <td class="text-right final"></td>
+            <td class="text-right rapid"></td>
+            <td class="text-right ultra"></td>
+        </tr>
+    
+        <tr id="ac-grg">
+            <th scope="row">GRG</th>
+            <td class="text-right final"></td>
+            <td class="text-right rapid"></td>
+            <td class="text-right ultra"></td>
+        </tr>
+    
+        <tr id="ac-esa">
+            <th scope="row">ESA</th>
+            <td class="text-right final"></td>
+            <td class="text-right rapid"></td>
+            <td class="text-right ultra"></td>
+        </tr>
+    
+        <tr id="ac-gfz">
+            <th scope="row">GFZ</th>
+            <td class="text-right final"></td>
+            <td class="text-right rapid"></td>
+            <td class="text-right ultra"></td>
+        </tr>
+    
+        <tr id="ac-cod">
+            <th scope="row">COD</th>
+            <td class="text-right final"></td>
+            <td class="text-right rapid"></td>
+            <td class="text-right ultra"></td>
+        </tr>
+    
+        <tr id="ac-jpl">
+            <th scope="row">JPL</th>
+            <td class="text-right final"></td>
+            <td class="text-right rapid"></td>
+            <td class="text-right ultra"></td>
+        </tr>
+    
+        <tr id="ac-mit">
+            <th scope="row">MIT</th>
+            <td class="text-right final"></td>
+            <td class="text-right rapid"></td>
+            <td class="text-right ultra"></td>
+        </tr>
+    
+        <tr id="ac-ngs">
+            <th scope="row">NGS</th>
+            <td class="text-right final"></td>
+            <td class="text-right rapid"></td>
+            <td class="text-right ultra"></td>
+        </tr>
+    
+        <tr id="ac-sio">
+            <th scope="row">SIO</th>
+            <td class="text-right final"></td>
+            <td class="text-right rapid"></td>
+            <td class="text-right ultra"></td>
+        </tr>
+    
+        <tr id="ac-usn">
+            <th scope="row">USN</th>
+            <td class="text-right final"></td>
+            <td class="text-right rapid"></td>
+            <td class="text-right ultra"></td>
+        </tr>
+    
+        <tr id="ac-jgx">
+            <th scope="row">JGX</th>
+            <td class="text-right final"></td>
+            <td class="text-right rapid"></td>
+            <td class="text-right ultra"></td>
+        </tr>
+    
+    </tbody>
+</table>
+
+                            </div>
+
+
+                            <!-- Receiver Content -->
+                            <div class="tab-pane fade overflow-auto" id="sb-info-equipment" role="tabpanel" aria-labelledby="info-equipment-tab" tabindex="0" style="max-height: 300px;">
+                                
+
+<table class="table table-striped text-start">
+    <thead class="sticky-top bg-light border-bottom border-dark border-2">
+        <tr>
+            <th scope="col">Receiver - Firmware</th>
+            <th scope="col">Antenna - Radome</th>
+            <th scope="col">Date</th>
+        </tr>
+    </thead>
+    <tbody>
+    
+    </tbody>
+</table>
+
+                            </div>
+
+
+                            <!-- Email Advisories Content -->
+                            <div class="tab-pane fade overflow-auto" id="sb-info-email" role="tabpanel" aria-labelledby="info-email-tab" tabindex="0" style="max-height: 300px;">
+                                
+
+<table class="table table-striped text-start">
+    <thead class="sticky-top bg-light border-bottom border-dark border-2">
+        <tr>
+            <th scope="col">Sender</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Date</th>
+        </tr>
+    </thead>
+    <tbody>
+    
+    </tbody>
+</table>
+
+                            </div>
+
+                            <!-- Downloads Content -->
+                            <div class="tab-pane fade overflow-auto" id="sb-info-downloads" role="tabpanel" aria-labelledby="info-downloads-tab" tabindex="0" style="max-height: 300px;">
+                                
+<table class="table table-striped text-start">
+  <thead class="border-bottom border-dark border-2">
+    <tr>
+      <th scope="col">Download Type</th>
+      <th scope="col">Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Station Log (ASCII)</th>
+      <td>
+        <a class="log-link-legacy" download ></a>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Station Log (GeodesyML)</th>
+      <td>
+        <a class="log-link-geodesyml" download ></a>
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+<table class="table table-striped text-start">
+  <thead class="border-bottom border-dark border-2">
+    <tr>
+      <th scope="col">Global Data Center</th>
+      <th scope="col">Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">CDDIS</th>
+      <td><a href="https://cddis.nasa.gov/Data_and_Derived_Products/CDDIS_Archive_Access.html" target="_blank">CDDIS Data</a></td>
+    </tr>
+    <tr>
+      <th scope="row">Wuhan University</th>
+      <td><a href="http://www.igs.gnsswhu.cn/index.php/home/index/index.html" target="_blank">Wuhan University Data</a></td>
+    </tr>
+    <tr>
+      <th scope="row">ESA</th>
+      <td><a href="https://gssc.esa.int/activities/igs-global-data-center/" target="_blank">ESA Data</a></td>
+    </tr>
+    <tr>
+      <th scope="row">IGN</th>
+      <td><a href="ftp://igs.ensg.ign.fr/pub/igs/data/" target="_blank">IGN Data</a></td>
+    </tr>
+    <tr>
+      <th scope="row">KASI</th>
+      <td><a href="https://gnss.kasi.re.kr/gdc_download.php" target="_blank">KASI Data</a></td>
+    </tr>
+    <tr>
+      <th scope="row">SOPAC</th>
+      <td><a href="http://sopac-csrc.ucsd.edu/index.php/data-download/" target="_blank">SOPAC Data</a></td>
+    </tr>
+  </tbody>
+</table>
+<p>For a list of other data centers, visit <a href="https://igs.org/data-access/" target="_blank">IGS Data Access</a></p>
+                            </div>
+
+                            <!-- Photos Content -->
+                            <div class="tab-pane fade overflow-auto" id="sb-info-photos" role="tabpanel" aria-labelledby="info-photos-tab" tabindex="0" style="max-height: 300px;">
+                                
+
+<div id="photo-container">
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Plots -->
+                    <div class="px-0 mt-3 h-100">
+                        <div class="px-0">
+                          <select id="sb-chart-select" class="form-select" aria-label="Please select an IGS Station Plot">
+                              
+                              <option selected value="rnxobs">RINEX Observations</option>
+                              
+                              <option  value="latency">RINEX Latency</option>
+                              
+                              <option  value="timeseries">Position Time Series</option>
+                              
+                              <option  value="residuals">Residuals</option>
+                              
+                              <option  value="rms-multipath">RMS Multipath</option>
+                              
+                              <option  value="cycle-slips">Total Phase Cycle Slips</option>
+                              
+                          </select>
+                        </div>
+                        <div id="sb-chart-content" class="border px-0"></div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary sidebar-toggle rounded-rect left text-nowrap">
+                Station Overview<i class="bi bi-arrow-up"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+        
+        <div id="map-settings-top" class="mb-auto w-100">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <button class="navbar-toggler mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#top-menu" aria-controls="top-menu" aria-expanded="false" aria-label="Toggle Top Menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse text-center" id="top-menu">
+                    <div class="navbar-nav align-items-center me-auto mb-lg-0">
+                        <div class="me-2 d-flex align-items-center">
+                            
+
+<form  data-slm-initial="{}" id="slm-station-search" method="get" > <div  
+     > <div id="div_id_search" class="mb-3"> <label for="id_search" class="form-label">
+                Search
+            </label> <input type="text" name="search" placeholder="Search" class="textinput form-control" id="id_search"> </div> </div> </form>
+
+                        </div>
+                        <div>
+                            <button id="filter-button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#filter" data-backdrop="false">
+                                <span class="no-filter-text">Advanced Search</span>
+                                <span class="filter-text" style="display: none">Filtered <span class="num-filtered"></span> from <span class="filtered-from-total">753</span> stations</span>
+                                <span class="spinner-border spinner-border-sm text-primary filter-spinner" role="status" style="display: none"><span class="sr-only"></span></span>
+                                <i class="bi bi-filter"></i>
+                            </button>
+                        </div>
+                        <div class="ms-2 d-flex align-items-center">
+                            <button id="copy-state" class="btn btn-primary" title="Create a link to this map." data-clipboard-text=""><i class="bi bi-share"></i></button>
+                        </div>
+                    </div>
+                    <ul class="navbar-nav ms-auto mb-lg-0">
+                        <li class="nav-item rounded me-2">
+                            <a tabindex="0" class="btn-popover nav-link map-settings btn-projections" data-bs-toggle="popover">Projections <i class="bi bi-map"></i></a>
+                        </li>
+                        <li class="nav-item rounded">
+                            <a tabindex="0" class="btn-popover nav-link map-settings btn-styles" data-bs-toggle="popover">Layers <i class="bi bi-stack"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            
+
+<div hidden>
+    <div data-name="projections-popover-content" class="settings-menu projections-menue w-100">
+        <fieldset>
+            <legend><span class="fs-6 fw-bold">Choose Projection</span></legend>
+            
+            <div class="form-check">
+                <input id="albers" class="form-check-input" type="radio" name="projection" value="albers"  >
+                <label class="form-check-label" for="albers">Albers</label>
+            </div>
+            
+            <div class="form-check">
+                <input id="equalEarth" class="form-check-input" type="radio" name="projection" value="equalEarth"  >
+                <label class="form-check-label" for="equalEarth">Equal Earth</label>
+            </div>
+            
+            <div class="form-check">
+                <input id="equirectangular" class="form-check-input" type="radio" name="projection" value="equirectangular"  >
+                <label class="form-check-label" for="equirectangular">Equi-Rectangular</label>
+            </div>
+            
+            <div class="form-check">
+                <input id="lambertConformalConic" class="form-check-input" type="radio" name="projection" value="lambertConformalConic"  >
+                <label class="form-check-label" for="lambertConformalConic">Lambert Conformal Conic</label>
+            </div>
+            
+            <div class="form-check">
+                <input id="mercator" class="form-check-input" type="radio" name="projection" value="mercator"  >
+                <label class="form-check-label" for="mercator">Mercator</label>
+            </div>
+            
+            <div class="form-check">
+                <input id="naturalEarth" class="form-check-input" type="radio" name="projection" value="naturalEarth"  >
+                <label class="form-check-label" for="naturalEarth">Natural Earth</label>
+            </div>
+            
+            <div class="form-check">
+                <input id="winkelTripel" class="form-check-input" type="radio" name="projection" value="winkelTripel"  >
+                <label class="form-check-label" for="winkelTripel">Winkel Tripel</label>
+            </div>
+            
+            <div class="form-check">
+                <input id="globe" class="form-check-input" type="radio" name="projection" value="globe" checked="checked" >
+                <label class="form-check-label" for="globe">Globe</label>
+            </div>
+            
+        </fieldset>
+    </div>
+</div>
+
+            
+
+<div hidden>
+    <div data-name="styles-popover-content" class="settings-menu styles-menu w-100">
+        <fieldset>
+            <legend><span class="fs-6 fw-bold">Choose Layer</span></legend>
+            
+            <div class="form-check">
+                <input id="streets" class="form-check-input" type="radio" name="style" value="streets" >
+                <label class="form-check-label" for="streets">Streets</label>
+            </div>
+            
+            <div class="form-check">
+                <input id="outdoors" class="form-check-input" type="radio" name="style" value="outdoors" >
+                <label class="form-check-label" for="outdoors">Outdoors</label>
+            </div>
+            
+            <div class="form-check">
+                <input id="light" class="form-check-input" type="radio" name="style" value="light" checked="checked">
+                <label class="form-check-label" for="light">Light</label>
+            </div>
+            
+            <div class="form-check">
+                <input id="dark" class="form-check-input" type="radio" name="style" value="dark" >
+                <label class="form-check-label" for="dark">Dark</label>
+            </div>
+            
+            <div class="form-check">
+                <input id="satellite" class="form-check-input" type="radio" name="style" value="satellite" >
+                <label class="form-check-label" for="satellite">Satellite</label>
+            </div>
+            
+            <div class="form-check">
+                <input id="satellite-streets" class="form-check-input" type="radio" name="style" value="satellite-streets" >
+                <label class="form-check-label" for="satellite-streets">Satellite Streets</label>
+            </div>
+            
+            <div class="form-check">
+                <input id="navigation-day" class="form-check-input" type="radio" name="style" value="navigation-day" >
+                <label class="form-check-label" for="navigation-day">Navigation Day</label>
+            </div>
+            
+            <div class="form-check">
+                <input id="navigation-night" class="form-check-input" type="radio" name="style" value="navigation-night" >
+                <label class="form-check-label" for="navigation-night">Navigation Night</label>
+            </div>
+            
+        </fieldset>
+    </div>
+</div>
+
+            
+
+<div hidden>
+    <div data-name="legend-popover-content" class="settings-menu legend-menu">
+        <ul class="p-0">
+            
+            <li style="list-style-type: none;"><img class="icon" style="margin-right: 10px;" height=13 width=13 src="/static/slm_network_map/img/marker-ok.svg" alt="Active">Data received within the last 10 days.</li>
+            
+            <li style="list-style-type: none;"><img class="icon" style="margin-right: 10px;" height=13 width=13 src="/static/slm_network_map/img/marker-warning.svg" alt="Outage">Data received within the last 30 days.</li>
+            
+            <li style="list-style-type: none;"><img class="icon" style="margin-right: 10px;" height=13 width=13 src="/static/slm_network_map/img/marker-failure.svg" alt="Dormant">No data for over 30 days.</li>
+            
+            <li style="list-style-type: none;"><img class="icon" style="margin-right: 10px;" height=13 width=13 src="/static/slm_network_map/img/marker-former.svg" alt="Former">Former station: no future data expected.</li>
+            
+            <li style="list-style-type: none;"><img class="icon" style="margin-right: 10px;" height=13 width=13 src="/static/slm_network_map/img/marker-proposed.svg" alt="Proposed">Proposed station: No past data, future data anticipated.</li>
+            
+        </ul>
+    </div>
+</div>
+
+        </div>
+        <div id="map-settings-bottom" class="w-100">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <button class="navbar-toggler mx-auto" type="button" data-bs-toggle="collapse" data-bs-target="#bottom-menu" aria-controls="bottom-menu" aria-expanded="false" aria-label="Toggle Bottom Menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse text-center" id="bottom-menu">
+                    <ul class="navbar-nav me-auto mb-lg-0">
+                        <li class="nav-item rounded">
+                            <a class="btn-popover nav-link map-settings btn-spin"><span class="playing" >Pause Rotation <i class="bi bi-pause-fill"></i></span><span class="paused" style="display: none">Play Rotation <i class="bi bi-play-fill"></i></span></a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto mb-lg-0">
+                        <li class="nav-item rounded me-2">
+                            <p id="summary" class="btn-popover nav-link"><span id="row-count">515</span> Stations as of <span id="date">March 13, 2024</span></p>
+                        </li>
+                        <li class="nav-item rounded">
+                            <a tabindex="0" class="btn-popover nav-link map-settings btn-legend" data-bs-toggle="popover" title="LEGEND">Legend <i class="bi bi-info-circle"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        
+        
+
+<div id="station-table" class="col-sm-1 col-md-3 d-flex justify-content-center">
+    <div id="right" class="sidebar flex-center right collapsed">
+        <div id="right-sidebar" class="right sidebar-content rounded-rect flex-center resizable">
+            <div class="station-table-container container-fluid mx-auto text-center p-3">
+                <table id="network-map-station-table" class="table table-sm table-striped table-hover cell-border display" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th class="not-export dt-center actions"><button class="btn btn-primary btn-sm col-btn" type="button" title="Column Visibility" data-bs-toggle="modal" data-bs-target="#column-visibility-modal" data-backdrop="false"><i class="bi bi-layout-three-columns"></i></button></th>
+                            <!-- stationTable will insert the headers here -->
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <button class="btn btn-primary sidebar-toggle rounded-rect right text-nowrap">
+                Station Table<i class="bi bi-arrow-down"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="column-visibility-modal" class="modal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div id="column-buttons">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+        
+
+<!-- Filter Modal -->
+<div class="modal fade" id="filter" tabindex="-1" aria-labelledby="filter-label" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="filter-label">Filter Station List</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body ui-front">
+                
+
+<form  data-slm-initial="{&quot;current&quot;: true}" id="slm-station-filter" method="get" > <div  
+    class="row" > <div  
+    class="col-3" > <div id="div_id_satellite_system" class="mb-3 form-switch"> <label  class="form-label">
+                Satellite System
+            </label> <div > <div class="form-check"> <input type="checkbox" class="form-check-input"  name="satellite_system" value="GPS"  id="id_satellite_system_0"> <label for="id_satellite_system_0" class="form-check-label">
+            GPS
+        </label> </div> <div class="form-check"> <input type="checkbox" class="form-check-input"  name="satellite_system" value="GLO"  id="id_satellite_system_1"> <label for="id_satellite_system_1" class="form-check-label">
+            GLO
+        </label> </div> <div class="form-check"> <input type="checkbox" class="form-check-input"  name="satellite_system" value="GAL"  id="id_satellite_system_2"> <label for="id_satellite_system_2" class="form-check-label">
+            GAL
+        </label> </div> <div class="form-check"> <input type="checkbox" class="form-check-input"  name="satellite_system" value="BDS"  id="id_satellite_system_3"> <label for="id_satellite_system_3" class="form-check-label">
+            BDS
+        </label> </div> <div class="form-check"> <input type="checkbox" class="form-check-input"  name="satellite_system" value="QZSS"  id="id_satellite_system_4"> <label for="id_satellite_system_4" class="form-check-label">
+            QZSS
+        </label> </div> <div class="form-check"> <input type="checkbox" class="form-check-input"  name="satellite_system" value="IRNSS"  id="id_satellite_system_5"> <label for="id_satellite_system_5" class="form-check-label">
+            IRNSS
+        </label> </div> <div class="form-check"> <input type="checkbox" class="form-check-input"  name="satellite_system" value="SBAS"  id="id_satellite_system_6"> <label for="id_satellite_system_6" class="form-check-label">
+            SBAS
+        </label> </div> <div class="form-check"> <input type="checkbox" class="form-check-input"  name="satellite_system" value="WAAS"  id="id_satellite_system_7"> <label for="id_satellite_system_7" class="form-check-label">
+            WAAS
+        </label> </div> </div> </div> <div id="div_id_frequency_standard" class="mb-3 form-switch"> <label  class="form-label">
+                Frequency Standard
+            </label> <div > <div class="form-check"> <input type="checkbox" class="form-check-input"  name="frequency_standard" value="I"  id="id_frequency_standard_0"> <label for="id_frequency_standard_0" class="form-check-label">
+            INTERNAL
+        </label> </div> <div class="form-check"> <input type="checkbox" class="form-check-input"  name="frequency_standard" value="H"  id="id_frequency_standard_1"> <label for="id_frequency_standard_1" class="form-check-label">
+            EXTERNAL H-MASER
+        </label> </div> <div class="form-check"> <input type="checkbox" class="form-check-input"  name="frequency_standard" value="C"  id="id_frequency_standard_2"> <label for="id_frequency_standard_2" class="form-check-label">
+            EXTERNAL CESIUM
+        </label> </div> <div class="form-check"> <input type="checkbox" class="form-check-input"  name="frequency_standard" value="R"  id="id_frequency_standard_3"> <label for="id_frequency_standard_3" class="form-check-label">
+            EXTERNAL RUBIDIUM
+        </label> </div> <div class="form-check"> <input type="checkbox" class="form-check-input"  name="frequency_standard" value="Q"  id="id_frequency_standard_4"> <label for="id_frequency_standard_4" class="form-check-label">
+            EXTERNAL QUARTZ
+        </label> </div> </div> </div> </div>
+<div  
+    class="col-4" > <fieldset  
+    class="slm-form-group "
+    > <legend>Equipment Filters</legend> <div class="mb-3"> <div id="div_id_current" class="mb-3 form-check form-switch"> <input type="checkbox" name="current" class="slmcheckboxinput form-check-input" id="id_current" checked> <label for="id_current" class="form-check-label">
+                    Current
+                </label> <div id="hint_id_current" class="form-text">Only include sites that currently have this equipment.</div> </div> </div> <div id="div_id_receiver" class="mb-3"> <label for="id_receiver" class="form-label">
+                Receiver
+            </label> <fieldset id="id_receiver-container" class="autocompleteselectmultiple" name="receiver"> <legend style="display: none">""</legend> <div  data-value-param="id" data-label-param="model" data-query-params="{&quot;in_use&quot;: true}" class=" search-input autocompleteselectmultiple form-select" data-service-url="/api/public/receiver/" data-search-param="model" id="id_receiver" multiple contenteditable="true"></div> <div style="display: none"> <label for="id_receiver-select"></label> <select id='id_receiver-select' name="receiver" multiple></select> </div> <div class="select-display"></div> <script type="module">
+        import { AutoCompleteMultiple } from "/static/slm/js/autocomplete.js";
+        let widget = new AutoCompleteMultiple({container: $('fieldset#id_receiver-container')});
+        $('fieldset#id_receiver-container select').data('widget', widget);
+        
+    </script>
+</fieldset> </div> <div id="div_id_antenna" class="mb-3"> <label for="id_antenna" class="form-label">
+                Antenna
+            </label> <fieldset id="id_antenna-container" class="autocompleteselectmultiple" name="antenna"> <legend style="display: none">""</legend> <div  data-value-param="id" data-label-param="model" data-query-params="{&quot;in_use&quot;: true}" class=" search-input autocompleteselectmultiple form-select" data-service-url="/api/public/antenna/" data-search-param="model" id="id_antenna" multiple contenteditable="true"></div> <div style="display: none"> <label for="id_antenna-select"></label> <select id='id_antenna-select' name="antenna" multiple></select> </div> <div class="select-display"></div> <script type="module">
+        import { AutoCompleteMultiple } from "/static/slm/js/autocomplete.js";
+        let widget = new AutoCompleteMultiple({container: $('fieldset#id_antenna-container')});
+        $('fieldset#id_antenna-container select').data('widget', widget);
+        
+    </script>
+</fieldset> </div> <div id="div_id_radome" class="mb-3"> <label for="id_radome" class="form-label">
+                Radome
+            </label> <fieldset id="id_radome-container" class="autocompleteselectmultiple" name="radome"> <legend style="display: none">""</legend> <div  data-value-param="id" data-label-param="model" data-query-params="{&quot;in_use&quot;: true}" class=" search-input autocompleteselectmultiple form-select" data-service-url="/api/public/radome/" data-search-param="model" id="id_radome" multiple contenteditable="true"></div> <div style="display: none"> <label for="id_radome-select"></label> <select id='id_radome-select' name="radome" multiple></select> </div> <div class="select-display"></div> <script type="module">
+        import { AutoCompleteMultiple } from "/static/slm/js/autocomplete.js";
+        let widget = new AutoCompleteMultiple({container: $('fieldset#id_radome-container')});
+        $('fieldset#id_radome-container select').data('widget', widget);
+        
+    </script>
+</fieldset> </div> </fieldset>
+
+</div>
+<div  
+    class="col-5" > <div id="div_id_agency" class="mb-3"> <label for="id_agency" class="form-label">
+                Agency
+            </label> <fieldset id="id_agency-container" class="autocompleteselectmultiple" name="agency"> <legend style="display: none">""</legend> <div  data-value-param="id" data-label-param="name" data-render-suggestion="return `&lt;span class=&quot;matchable&quot;&gt;(${obj.shortname})&lt;/span&gt;&lt;span class=&quot;matchable&quot;&gt;${obj.name}&lt;/span&gt;`;" class=" search-input autocompleteselectmultiple form-select" data-service-url="/api/public/agency/" data-search-param="search" id="id_agency" multiple contenteditable="true"></div> <div style="display: none"> <label for="id_agency-select"></label> <select id='id_agency-select' name="agency" multiple></select> </div> <div class="select-display"></div> <script type="module">
+        import { AutoCompleteMultiple } from "/static/slm/js/autocomplete.js";
+        let widget = new AutoCompleteMultiple({container: $('fieldset#id_agency-container')});
+        $('fieldset#id_agency-container select').data('widget', widget);
+        
+    </script>
+</fieldset> </div> <div id="div_id_network" class="mb-3"> <label for="id_network" class="form-label">
+                Network
+            </label> <fieldset id="id_network-container" class="autocompleteselectmultiple" name="network"> <legend style="display: none">""</legend> <div  data-value-param="id" data-label-param="name" class=" search-input autocompleteselectmultiple form-select" data-service-url="/api/public/network/" data-search-param="name" id="id_network" multiple contenteditable="true"></div> <div style="display: none"> <label for="id_network-select"></label> <select id='id_network-select' name="network" multiple></select> </div> <div class="select-display"></div> <script type="module">
+        import { AutoCompleteMultiple } from "/static/slm/js/autocomplete.js";
+        let widget = new AutoCompleteMultiple({container: $('fieldset#id_network-container')});
+        $('fieldset#id_network-container select').data('widget', widget);
+        
+    </script>
+</fieldset> </div> <div id="div_id_country" class="mb-3"> <label for="id_country" class="form-label">
+                Country/Region
+            </label> <fieldset id="id_country-container" class="autocompleteselectmultiple" name="country"> <legend style="display: none">""</legend> <div  data-value-param="value" data-label-param="label" data-render-suggestion="return `&lt;span class=&quot;fi fi-${obj.value.toLowerCase()}&quot;&gt;&lt;/span&gt;&lt;span class=&quot;matchable&quot;&gt;${obj.label}&lt;/span&gt;`;" class="slm-country search-input autocompleteenumselectmultiple form-select" data-source="[{&quot;label&quot;: &quot;Antarctica&quot;, &quot;value&quot;: &quot;AQ&quot;}, {&quot;label&quot;: &quot;Argentina&quot;, &quot;value&quot;: &quot;AR&quot;}, {&quot;label&quot;: &quot;Armenia&quot;, &quot;value&quot;: &quot;AM&quot;}, {&quot;label&quot;: &quot;Australia&quot;, &quot;value&quot;: &quot;AU&quot;}, {&quot;label&quot;: &quot;Austria&quot;, &quot;value&quot;: &quot;AT&quot;}, {&quot;label&quot;: &quot;Bahamas (the)&quot;, &quot;value&quot;: &quot;BS&quot;}, {&quot;label&quot;: &quot;Bahrain&quot;, &quot;value&quot;: &quot;BH&quot;}, {&quot;label&quot;: &quot;Barbados&quot;, &quot;value&quot;: &quot;BB&quot;}, {&quot;label&quot;: &quot;Belgium&quot;, &quot;value&quot;: &quot;BE&quot;}, {&quot;label&quot;: &quot;Benin&quot;, &quot;value&quot;: &quot;BJ&quot;}, {&quot;label&quot;: &quot;Brazil&quot;, &quot;value&quot;: &quot;BR&quot;}, {&quot;label&quot;: &quot;Brunei Darussalam&quot;, &quot;value&quot;: &quot;BN&quot;}, {&quot;label&quot;: &quot;Bulgaria&quot;, &quot;value&quot;: &quot;BG&quot;}, {&quot;label&quot;: &quot;Cabo Verde&quot;, &quot;value&quot;: &quot;CV&quot;}, {&quot;label&quot;: &quot;Canada&quot;, &quot;value&quot;: &quot;CA&quot;}, {&quot;label&quot;: &quot;Chile&quot;, &quot;value&quot;: &quot;CL&quot;}, {&quot;label&quot;: &quot;China&quot;, &quot;value&quot;: &quot;CN&quot;}, {&quot;label&quot;: &quot;Colombia&quot;, &quot;value&quot;: &quot;CO&quot;}, {&quot;label&quot;: &quot;Cook Islands (the)&quot;, &quot;value&quot;: &quot;CK&quot;}, {&quot;label&quot;: &quot;Costa Rica&quot;, &quot;value&quot;: &quot;CR&quot;}, {&quot;label&quot;: &quot;Croatia&quot;, &quot;value&quot;: &quot;HR&quot;}, {&quot;label&quot;: &quot;Cuba&quot;, &quot;value&quot;: &quot;CU&quot;}, {&quot;label&quot;: &quot;Cyprus&quot;, &quot;value&quot;: &quot;CY&quot;}, {&quot;label&quot;: &quot;Czechia&quot;, &quot;value&quot;: &quot;CZ&quot;}, {&quot;label&quot;: &quot;Djibouti&quot;, &quot;value&quot;: &quot;DJ&quot;}, {&quot;label&quot;: &quot;Dominican Republic (the)&quot;, &quot;value&quot;: &quot;DO&quot;}, {&quot;label&quot;: &quot;Ecuador&quot;, &quot;value&quot;: &quot;EC&quot;}, {&quot;label&quot;: &quot;El Salvador&quot;, &quot;value&quot;: &quot;SV&quot;}, {&quot;label&quot;: &quot;Ethiopia&quot;, &quot;value&quot;: &quot;ET&quot;}, {&quot;label&quot;: &quot;Fiji&quot;, &quot;value&quot;: &quot;FJ&quot;}, {&quot;label&quot;: &quot;Finland&quot;, &quot;value&quot;: &quot;FI&quot;}, {&quot;label&quot;: &quot;France&quot;, &quot;value&quot;: &quot;FR&quot;}, {&quot;label&quot;: &quot;French Guiana&quot;, &quot;value&quot;: &quot;GF&quot;}, {&quot;label&quot;: &quot;French Polynesia&quot;, &quot;value&quot;: &quot;PF&quot;}, {&quot;label&quot;: &quot;French Southern Territories (the)&quot;, &quot;value&quot;: &quot;TF&quot;}, {&quot;label&quot;: &quot;Gabon&quot;, &quot;value&quot;: &quot;GA&quot;}, {&quot;label&quot;: &quot;Germany&quot;, &quot;value&quot;: &quot;DE&quot;}, {&quot;label&quot;: &quot;Ghana&quot;, &quot;value&quot;: &quot;GH&quot;}, {&quot;label&quot;: &quot;Greece&quot;, &quot;value&quot;: &quot;GR&quot;}, {&quot;label&quot;: &quot;Greenland&quot;, &quot;value&quot;: &quot;GL&quot;}, {&quot;label&quot;: &quot;Guadeloupe&quot;, &quot;value&quot;: &quot;GP&quot;}, {&quot;label&quot;: &quot;Guam&quot;, &quot;value&quot;: &quot;GU&quot;}, {&quot;label&quot;: &quot;Guatemala&quot;, &quot;value&quot;: &quot;GT&quot;}, {&quot;label&quot;: &quot;Haiti&quot;, &quot;value&quot;: &quot;HT&quot;}, {&quot;label&quot;: &quot;Honduras&quot;, &quot;value&quot;: &quot;HN&quot;}, {&quot;label&quot;: &quot;Hungary&quot;, &quot;value&quot;: &quot;HU&quot;}, {&quot;label&quot;: &quot;Iceland&quot;, &quot;value&quot;: &quot;IS&quot;}, {&quot;label&quot;: &quot;India&quot;, &quot;value&quot;: &quot;IN&quot;}, {&quot;label&quot;: &quot;Indonesia&quot;, &quot;value&quot;: &quot;ID&quot;}, {&quot;label&quot;: &quot;Iraq&quot;, &quot;value&quot;: &quot;IQ&quot;}, {&quot;label&quot;: &quot;Israel&quot;, &quot;value&quot;: &quot;IL&quot;}, {&quot;label&quot;: &quot;Italy&quot;, &quot;value&quot;: &quot;IT&quot;}, {&quot;label&quot;: &quot;Jamaica&quot;, &quot;value&quot;: &quot;JM&quot;}, {&quot;label&quot;: &quot;Japan&quot;, &quot;value&quot;: &quot;JP&quot;}, {&quot;label&quot;: &quot;Jordan&quot;, &quot;value&quot;: &quot;JO&quot;}, {&quot;label&quot;: &quot;Kazakhstan&quot;, &quot;value&quot;: &quot;KZ&quot;}, {&quot;label&quot;: &quot;Kenya&quot;, &quot;value&quot;: &quot;KE&quot;}, {&quot;label&quot;: &quot;Kiribati&quot;, &quot;value&quot;: &quot;KI&quot;}, {&quot;label&quot;: &quot;Korea (the Republic of)&quot;, &quot;value&quot;: &quot;KR&quot;}, {&quot;label&quot;: &quot;Kyrgyzstan&quot;, &quot;value&quot;: &quot;KG&quot;}, {&quot;label&quot;: &quot;Latvia&quot;, &quot;value&quot;: &quot;LV&quot;}, {&quot;label&quot;: &quot;Madagascar&quot;, &quot;value&quot;: &quot;MG&quot;}, {&quot;label&quot;: &quot;Malaysia&quot;, &quot;value&quot;: &quot;MY&quot;}, {&quot;label&quot;: &quot;Maldives&quot;, &quot;value&quot;: &quot;MV&quot;}, {&quot;label&quot;: &quot;Marshall Islands (the)&quot;, &quot;value&quot;: &quot;MH&quot;}, {&quot;label&quot;: &quot;Martinique&quot;, &quot;value&quot;: &quot;MQ&quot;}, {&quot;label&quot;: &quot;Mauritius&quot;, &quot;value&quot;: &quot;MU&quot;}, {&quot;label&quot;: &quot;Mayotte&quot;, &quot;value&quot;: &quot;YT&quot;}, {&quot;label&quot;: &quot;Mexico&quot;, &quot;value&quot;: &quot;MX&quot;}, {&quot;label&quot;: &quot;Mongolia&quot;, &quot;value&quot;: &quot;MN&quot;}, {&quot;label&quot;: &quot;Morocco&quot;, &quot;value&quot;: &quot;MA&quot;}, {&quot;label&quot;: &quot;Namibia&quot;, &quot;value&quot;: &quot;NA&quot;}, {&quot;label&quot;: &quot;Nauru&quot;, &quot;value&quot;: &quot;NR&quot;}, {&quot;label&quot;: &quot;Netherlands (the)&quot;, &quot;value&quot;: &quot;NL&quot;}, {&quot;label&quot;: &quot;New Caledonia&quot;, &quot;value&quot;: &quot;NC&quot;}, {&quot;label&quot;: &quot;New Zealand&quot;, &quot;value&quot;: &quot;NZ&quot;}, {&quot;label&quot;: &quot;Nicaragua&quot;, &quot;value&quot;: &quot;NI&quot;}, {&quot;label&quot;: &quot;Nigeria&quot;, &quot;value&quot;: &quot;NG&quot;}, {&quot;label&quot;: &quot;Niue&quot;, &quot;value&quot;: &quot;NU&quot;}, {&quot;label&quot;: &quot;North Macedonia&quot;, &quot;value&quot;: &quot;MK&quot;}, {&quot;label&quot;: &quot;Norway&quot;, &quot;value&quot;: &quot;NO&quot;}, {&quot;label&quot;: &quot;Oman&quot;, &quot;value&quot;: &quot;OM&quot;}, {&quot;label&quot;: &quot;Papua New Guinea&quot;, &quot;value&quot;: &quot;PG&quot;}, {&quot;label&quot;: &quot;Peru&quot;, &quot;value&quot;: &quot;PE&quot;}, {&quot;label&quot;: &quot;Philippines (the)&quot;, &quot;value&quot;: &quot;PH&quot;}, {&quot;label&quot;: &quot;Poland&quot;, &quot;value&quot;: &quot;PL&quot;}, {&quot;label&quot;: &quot;Portugal&quot;, &quot;value&quot;: &quot;PT&quot;}, {&quot;label&quot;: &quot;Romania&quot;, &quot;value&quot;: &quot;RO&quot;}, {&quot;label&quot;: &quot;Russian Federation (the)&quot;, &quot;value&quot;: &quot;RU&quot;}, {&quot;label&quot;: &quot;Rwanda&quot;, &quot;value&quot;: &quot;RW&quot;}, {&quot;label&quot;: &quot;Saint Helena, Ascension and Tristan da Cunha&quot;, &quot;value&quot;: &quot;SH&quot;}, {&quot;label&quot;: &quot;Samoa&quot;, &quot;value&quot;: &quot;WS&quot;}, {&quot;label&quot;: &quot;Saudi Arabia&quot;, &quot;value&quot;: &quot;SA&quot;}, {&quot;label&quot;: &quot;Senegal&quot;, &quot;value&quot;: &quot;SN&quot;}, {&quot;label&quot;: &quot;Seychelles&quot;, &quot;value&quot;: &quot;SC&quot;}, {&quot;label&quot;: &quot;Singapore&quot;, &quot;value&quot;: &quot;SG&quot;}, {&quot;label&quot;: &quot;Slovakia&quot;, &quot;value&quot;: &quot;SK&quot;}, {&quot;label&quot;: &quot;Solomon Islands&quot;, &quot;value&quot;: &quot;SB&quot;}, {&quot;label&quot;: &quot;South Africa&quot;, &quot;value&quot;: &quot;ZA&quot;}, {&quot;label&quot;: &quot;Spain&quot;, &quot;value&quot;: &quot;ES&quot;}, {&quot;label&quot;: &quot;Sri Lanka&quot;, &quot;value&quot;: &quot;LK&quot;}, {&quot;label&quot;: &quot;Sweden&quot;, &quot;value&quot;: &quot;SE&quot;}, {&quot;label&quot;: &quot;Switzerland&quot;, &quot;value&quot;: &quot;CH&quot;}, {&quot;label&quot;: &quot;Taiwan&quot;, &quot;value&quot;: &quot;TW&quot;}, {&quot;label&quot;: &quot;Thailand&quot;, &quot;value&quot;: &quot;TH&quot;}, {&quot;label&quot;: &quot;Tonga&quot;, &quot;value&quot;: &quot;TO&quot;}, {&quot;label&quot;: &quot;Tuvalu&quot;, &quot;value&quot;: &quot;TV&quot;}, {&quot;label&quot;: &quot;T\u00fcrkiye&quot;, &quot;value&quot;: &quot;TR&quot;}, {&quot;label&quot;: &quot;Uganda&quot;, &quot;value&quot;: &quot;UG&quot;}, {&quot;label&quot;: &quot;Ukraine&quot;, &quot;value&quot;: &quot;UA&quot;}, {&quot;label&quot;: &quot;United States of America (the)&quot;, &quot;value&quot;: &quot;US&quot;}, {&quot;label&quot;: &quot;Uruguay&quot;, &quot;value&quot;: &quot;UY&quot;}, {&quot;label&quot;: &quot;Uzbekistan&quot;, &quot;value&quot;: &quot;UZ&quot;}, {&quot;label&quot;: &quot;Vanuatu&quot;, &quot;value&quot;: &quot;VU&quot;}, {&quot;label&quot;: &quot;Viet Nam&quot;, &quot;value&quot;: &quot;VN&quot;}, {&quot;label&quot;: &quot;Virgin Islands (U.S.)&quot;, &quot;value&quot;: &quot;VI&quot;}, {&quot;label&quot;: &quot;Zambia&quot;, &quot;value&quot;: &quot;ZM&quot;}]" id="id_country" multiple contenteditable="true"></div> <div style="display: none"> <label for="id_country-select"></label> <select id='id_country-select' name="country" multiple></select> </div> <div class="select-display"></div> <script type="module">
+        import { AutoCompleteMultiple } from "/static/slm/js/autocomplete.js";
+        let widget = new AutoCompleteMultiple({container: $('fieldset#id_country-container')});
+        $('fieldset#id_country-container select').data('widget', widget);
+        
+    </script>
+</fieldset> </div> <div class="mb-3"> <div id="div_id_include_former" class="mb-3 form-check form-switch"> <input type="checkbox" name="include_former" class="slmcheckboxinput form-check-input" id="id_include_former"> <label for="id_include_former" class="form-check-label">
+                    Include Former
+                </label> <div id="hint_id_include_former" class="form-text">Include stations that are no longer maintained as part of any of our networks.</div> </div> </div> <div class="mb-3"> <div id="div_id_include_proposed" class="mb-3 form-check form-switch"> <input type="checkbox" name="include_proposed" class="slmcheckboxinput form-check-input" id="id_include_proposed"> <label for="id_include_proposed" class="form-check-label">
+                    Include Proposed
+                </label> <div id="hint_id_include_proposed" class="form-text">Include stations that are proposed for future inclusion in one of our networks.</div> </div> </div> </div>
+
+</div> </form>
+
+            </div>
+            <div class="modal-footer">
+                <button name="cancel" type="button" class="btn btn-secondary me-auto" data-bs-dismiss="modal">Cancel</button>
+                <button name="clear" type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Clear</button>
+                <button name="apply" type="button" class="btn btn-success" data-bs-dismiss="modal">Search</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </div>
+
+    
+
+
+    
+    
+
+        <script id="network-map-settings" type="application/json">{"controller": {"table": true, "info": false, "sidebars": ["table"], "slm_links": false}, "map": {"style": "mapbox://styles/mapbox/light-v11", "projection": "globe", "zoom": 2.0, "center": [0.0, 0.0], "spin": true, "accessToken": "pk.eyJ1IjoiaWdzY2IiLCJhIjoiY2xmd3R3OTQwMDNtNTNoa2ZnbWtxZWdzZiJ9.VpzPWY0l8yYre0OnYcljMw"}, "info": {}, "table": {"max_sites": 753, "column_labels": {"name": "Site Name", "city": "City", "state": "State", "country": "Country/Region", "receiver_type": "Receiver", "firmware": "Receiver Firmware", "serial_number": "Receiver S/N", "antenna_type,radome_type": "Antenna - Radome", "antenna_type": "Antenna", "radome_type": "Radome", "satellite_system": "Satellite System", "latitude": "Latitude", "longitude": "Longitude", "elevation": "Height (m)", "x": "X (m)", "y": "Y (m)", "z": "Z (m)", "antcal": "Calibration", "network": "Networks", "data_center": "Data Center", "domes_number": "IERS DOMES", "tide_gauges": "Tide Gauge", "frequency_standard": "Clock", "agency": "Agencies", "last_data": "Last Data"}}}</script>
+
+        <script type="module">
+            import { NetworkMapController } from "/static/slm_network_map/js/controller.js";
+
+            mapboxgl.accessToken = 'pk.eyJ1IjoiaWdzY2IiLCJhIjoiY2xmd3R3OTQwMDNtNTNoa2ZnbWtxZWdzZiJ9.VpzPWY0l8yYre0OnYcljMw';
+            const controller = new NetworkMapController({
+                container: $('#network-map-container'),
+                settings: JSON.parse($('#network-map-settings').get(0).textContent)
+            });
+        </script>
+        
+    
+</body>
+</html>

@@ -11,6 +11,7 @@ class HTMLDownloader:
     url - path to the website
     save_path - path to save data
     """
+
     def __init__(self, url, save_path):
         self.url = url
         self.save_path = save_path
@@ -25,11 +26,15 @@ class HTMLDownloader:
             print(f"Error during HTML download: {e}")
             return None
 
-    def save_to_file(self, html_content, filename=None):
+    def save_to_file(self, html_content, filename=None, custom_path=None):
         try:
             if not filename:
                 filename = "output.html"
-            file_path = os.path.join(self.save_path, filename)
+            if custom_path:
+                file_path = os.path.join(custom_path, filename)
+            else:
+                file_path = os.path.join(self.save_path, filename)
+
             with open(file_path, "w", encoding="utf-8") as html_file:
                 html_file.write(html_content)
             self.saved_file_path = file_path

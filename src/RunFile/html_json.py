@@ -13,3 +13,10 @@ my_url = "https://network.igs.org/"
 html_downloader = html_1(my_url, patch_save_to_log_files)
 unique_th_values = html_downloader.get_unique_th_values()
 print(unique_th_values)
+
+# Save HTML to file
+html_content = html_downloader.download_html()
+if html_content:
+    html_downloader.save_to_file(html_content, filename="HTML_IGSnetwork.html", custom_path=patch_save_to_log_files)
+else:
+    print("Unable to download HTML content.")
