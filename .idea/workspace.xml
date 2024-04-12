@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a3899754-40df-4d4e-b7e6-7bcf8a2727cf" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Modules/_5_sky_map/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modules/_5_sky_map/skyMap.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/RunFile/sky_map.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/_3_HTML_JSON_data/HTML_JSON.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/_3_HTML_JSON_data/HTML_JSON.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RunFile/html_json.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/RunFile/html_json.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,9 +47,12 @@
     "Python.html_json.executor": "Run",
     "Python.readFileLog.executor": "Run",
     "Python.read_analysis_file.executor": "Run",
+    "Python.skyMap.executor": "Run",
+    "Python.sky_map.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/admin/Desktop/Python_test",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
