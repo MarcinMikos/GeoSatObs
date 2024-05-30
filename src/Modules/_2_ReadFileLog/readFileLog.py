@@ -101,10 +101,11 @@ class DataWARP:
                 data['ss'] = np.abs(data['ss'])
                 data['date'] = pd.to_datetime(data[['YY', 'MM', 'DD', 'hh', 'mm', 'ss']].astype(str).apply(' '.join, 1),
                                               format='%Y %m %d %H %M %S.0')
+
                 data = data[['date', 'ClcG', 'ClcC', 'mClcE', 'nC', 'U', 'mU']]
                 data = data.set_index('date').astype(float)
                 data = data.replace([np.inf, -np.inf], np.nan).dropna()
                 data_dict_2[k] = data
             except Exception as selected_data_error:
                 print(f"Error processing selected data for {k}: {selected_data_error}")
-        return self.data_dict, data_dict_2
+        return data_dict_2

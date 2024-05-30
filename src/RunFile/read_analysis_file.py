@@ -1,6 +1,7 @@
 # Libraries
 from src.Modules._2_ReadFileLog.readFileLog import DataWARP as dWARP
 import os
+import matplotlib.pyplot as plt
 
 # Path to load .log files
 patch_load_to_log_file_period_1 = os.path.join(os.path.abspath(os.path.join(os.getcwd(), '..', '..')), 'src',
@@ -23,5 +24,48 @@ data_warp = dWARP(source_folders, patch_save_to_log_files, station_ids)
 data_warp.process_data(start_range=244, end_range=246, include_char='s')
 data_raw = data_warp.get_data() # load a raw data with file
 data_selected = data_warp.selected_data() # load a selected data with file
-print(data_raw)
+#print(data_raw)
 print(data_selected)
+print(type(data_selected))
+
+# Path to save .png files
+patch_save_to_png_file_period_1 = os.path.join(os.path.abspath(os.path.join(os.getcwd(), '..', '..')), 'src',
+                                               'DataCatalogs', 'ChartFiles')
+# Create a charts for the selected data
+for station_id, df in data_selected.items():
+    # Calculate statistics
+    U_mean = df['U'].mean()
+    U_std = df['U'].std()
+    U_min = df['U'].min()
+    U_max = df['U'].max()
+
+    mU_mean = df['mU'].mean()
+    mU_std = df['mU'].std()
+    mU_min = df['mU'].min()
+    mU_max = df['mU'].max()
+
+    # Plotting for column 'U'
+    plt.figure(figsize=(10, 6))
+    plt.plot(df.index, df['U'], label='U', color='blue')
+    plt.title(f'{station_id} - U')
+    plt.xlabel('[month-day hour]')
+    plt.ylabel('U [m]')
+    plt.legend()
+    plt.grid(True)
+    plt.text(df.index[0], df['U'].max(), f'Mean: {U_mean:.2f}m\nStd: {U_std:.2f}m\nMin: {U_min:.2f}m\nMax: {U_max:.2f}m',
+             fontsize=10, verticalalignment='top', horizontalalignment='left', bbox=dict(facecolor='white', alpha=0.5))
+    plt.savefig(os.path.join(patch_save_to_png_file_period_1, f'{station_id}_U.png'))
+    plt.show()
+
+    # Plotting for column 'mU'
+    plt.figure(figsize=(10, 6))
+    plt.plot(df.index, df['mU'], label='mU', color='red')
+    plt.title(f'{station_id} - mU')
+    plt.xlabel('[month-day hour]')
+    plt.ylabel('mU [m]]')
+    plt.legend()
+    plt.grid(True)
+    plt.text(df.index[0], df['mU'].max(), f'Mean: {mU_mean:.2f}m\nStd: {mU_std:.2f}m\nMin: {mU_min:.2f}m\nMax: {mU_max:.2f}m',
+             fontsize=10, verticalalignment='top', horizontalalignment='left', bbox=dict(facecolor='white', alpha=0.5))
+    plt.savefig(os.path.join(patch_save_to_png_file_period_1, f'{station_id}_mU.png'))
+    plt.show()
