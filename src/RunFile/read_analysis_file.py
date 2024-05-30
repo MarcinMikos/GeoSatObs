@@ -2,6 +2,10 @@
 from src.Modules._2_ReadFileLog.readFileLog import DataWARP as dWARP
 import os
 import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from datetime import timedelta
 
 # Path to load .log files
 patch_load_to_log_file_period_1 = os.path.join(os.path.abspath(os.path.join(os.getcwd(), '..', '..')), 'src',
@@ -68,4 +72,31 @@ for station_id, df in data_selected.items():
     plt.text(df.index[0], df['mU'].max(), f'Mean: {mU_mean:.2f}m\nStd: {mU_std:.2f}m\nMin: {mU_min:.2f}m\nMax: {mU_max:.2f}m',
              fontsize=10, verticalalignment='top', horizontalalignment='left', bbox=dict(facecolor='white', alpha=0.5))
     plt.savefig(os.path.join(patch_save_to_png_file_period_1, f'{station_id}_mU.png'))
+    plt.show()
+
+convergenceTime = data_selected
+for station_id, df in convergenceTime.items():
+    X = df.index.astype('int64').values.reshape(-1, 1)
+    y = df['mU'].values
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    model = LinearRegression()
+    model.fit(X_train, y_train)
+    score = model.score(X_test, y_test)
+    print(f'Model score for {station_id}: {score}')
+
+    threshold = 0.20
+    time_delta = timedelta(seconds=model.intercept_ / threshold)
+    print(f'Time to reach mU < {threshold} for {station_id}: {time_delta}')
+
+    y_pred = model.predict(X_test)
+
+    plt.figure(figsize=(10, 6))
+    plt.scatter(X_test, y_test, color='blue', label='Actual Data')
+    plt.plot(X_test, y_pred, color='red', linewidth=2, label='Linear Regression')
+    plt.title(f'Linear Regression for {station_id}')
+    plt.xlabel('Date')
+    plt.ylabel('mU [m]')
+    plt.legend()
+    plt.grid(True)
     plt.show()

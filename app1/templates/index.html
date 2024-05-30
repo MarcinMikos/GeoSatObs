@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis for GNSS data</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 50px;
+            background-color: #6a6a6a;
+            color: #f8f9fa;
+        }
+        .header {
+            padding: 20px 0;
+            text-align: center;
+            background-color: #343a40;
+            color: #f8f9fa;
+        }
+        .footer {
+            padding: 20px 0;
+            text-align: center;
+            background-color: #343a40;
+            color: #f8f9fa;
+        }
+        .content {
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>GNSS Data</h1>
+    </div>
+
+    <h5></h5>
+    <div style="display: flex; align-items: center; justify-content: center;">
+    <div style="width: 50%;">
+        <img src="{% static 'images/BOR1_Period_1_U.png' %}" width="100%" height="auto" alt="BOR1_Period_1_mU">
+        <p style="color: #f8f9fa; text-align: center;">Quality analysis of the stability of the height coordinate for IGS station</p>
+    </div>
+    <div style="width: 50%; text-align: left; padding-left: 20px;">
+        <p style="color: #f8f9fa;">The analysis includes data with intervals of 30s for 3 days. Analysis includes quality of parameter estimation. </p>
+    </div>
+    </div>
+
+    <h5></h5>
+    <div style="display: flex; align-items: center; justify-content: center;">
+    <div style="width: 50%;">
+        <img src="{% static 'images/BOR1_Period_1_mU.png' %}" width="100%" height="auto" alt="BOR1_Period_1_mU">
+        <p style="color: #f8f9fa; text-align: center;">Quality analysis of the stability of the error of height coordinate for IGS station</p>
+    </div>
+    <div style="width: 50%; text-align: left; padding-left: 20px;">
+        <p style="color: #f8f9fa;">The analysis includes data with intervals of 30s for 3 days. Analysis includes quality of parameter estimation. </p>
+    </div>
+    </div>
+
+    <div class="footer">
+        <h1>GNSS Data</h1>
+    </div>
+</body>
+</html>
