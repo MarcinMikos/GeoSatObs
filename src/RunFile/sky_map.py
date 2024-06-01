@@ -4,5 +4,5 @@ import tkinter as tk
 
 # The code that runs the sentence
 root = tk.Tk()
-app = SkyMap(root, num_stars=1000)  # Tutaj możesz ustawić żądaną ilość gwiazd
+app = SkyMap(root, num_stars=500)  # number of stars (num_stars)
 root.mainloop()

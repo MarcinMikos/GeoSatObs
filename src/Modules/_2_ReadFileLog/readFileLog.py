@@ -102,7 +102,7 @@ class DataWARP:
                 data['date'] = pd.to_datetime(data[['YY', 'MM', 'DD', 'hh', 'mm', 'ss']].astype(str).apply(' '.join, 1),
                                               format='%Y %m %d %H %M %S.0')
 
-                data = data[['date', 'ClcG', 'ClcC', 'mClcE', 'nC', 'U', 'mU']]
+                data = data[['date', 'ClcG', 'ClcC', 'ClcE', 'nC', 'U', 'mU']]
                 data = data.set_index('date').astype(float)
                 data = data.replace([np.inf, -np.inf], np.nan).dropna()
                 data_dict_2[k] = data

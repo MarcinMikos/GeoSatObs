@@ -5,30 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a3899754-40df-4d4e-b7e6-7bcf8a2727cf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app1/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app1/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app1/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app1/settings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app1/static/images/BOR1_Period_1_U.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app1/static/images/BOR1_Period_1_mU.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app1/static/images/BOR1_Period_2_U.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app1/static/images/BOR1_Period_2_mU.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app1/templates/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app1/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app1/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app1/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/asgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/settings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/website/wsgi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/_4_website/_1_App/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app1/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/_4_website/_2_Website/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app1/migrations/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/_4_website/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RunFile/read_analysis_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/RunFile/read_analysis_file.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/_2_ReadFileLog/readFileLog.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/_2_ReadFileLog/readFileLog.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/_5_sky_map/skyMap.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/_5_sky_map/skyMap.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RunFile/sky_map.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/RunFile/sky_map.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,26 +38,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.HTML_JSON.executor": "Run",
-    "Python.RNX_download.executor": "Run",
-    "Python.downloadRNX.executor": "Run",
-    "Python.html_json.executor": "Run",
-    "Python.readFileLog.executor": "Run",
-    "Python.read_analysis_file.executor": "Run",
-    "Python.settings.executor": "Run",
-    "Python.skyMap.executor": "Run",
-    "Python.sky_map.executor": "Run",
-    "Python.urls.executor": "Run",
-    "Python.views.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/M_Mikos/Podyplomowka/1_Projekt_zaliczenie/GeoSatObs/app1/static/images",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.HTML_JSON.executor&quot;: &quot;Run&quot;,
+    &quot;Python.RNX_download.executor&quot;: &quot;Run&quot;,
+    &quot;Python.downloadRNX.executor&quot;: &quot;Run&quot;,
+    &quot;Python.html_json.executor&quot;: &quot;Run&quot;,
+    &quot;Python.readFileLog.executor&quot;: &quot;Run&quot;,
+    &quot;Python.read_analysis_file.executor&quot;: &quot;Run&quot;,
+    &quot;Python.settings.executor&quot;: &quot;Run&quot;,
+    &quot;Python.skyMap.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sky_map.executor&quot;: &quot;Run&quot;,
+    &quot;Python.urls.executor&quot;: &quot;Run&quot;,
+    &quot;Python.views.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/M_Mikos/Podyplomowka/1_Projekt_zaliczenie/GeoSatObs&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\M_Mikos\Podyplomowka\1_Projekt_zaliczenie\GeoSatObs\app1\static\images" />
